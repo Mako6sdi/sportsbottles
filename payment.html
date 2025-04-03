@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment - Sports Bottles Shop</title>
+  <style>
+    /* Base styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f8f9fa;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Header */
+    header {
+      background-color: #3182ce;
+      color: white;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    
+    .logo a {
+      color: white;
+      text-decoration: none;
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+    
+    nav ul li {
+      margin-left: 1.5rem;
+    }
+    
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+    }
+    
+    /* Page title */
+    .page-title {
+      margin: 2rem 0;
+      font-size: 2rem;
+      text-align: center;
+    }
+    
+    /* Payment section */
+    .payment-section {
+      padding: 2rem 0 4rem;
+    }
+    
+    .payment-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    
+    .payment-form {
+      flex: 3;
+      min-width: 300px;
+    }
+    
+    .order-summary {
+      flex: 1;
+      min-width: 250px;
+      background-color: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      align-self: flex-start;
+    }
+    
+    .form-card {
+      background-color: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+    }
+    
+    .form-title {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    
+    .form-input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+    
+    .form-row {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .form-col {
+      flex: 1;
+    }
+    
+    .payment-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .payment-method {
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: border-color 0.3s;
+    }
+    
+    .payment-method:hover {
+      border-color: #3182ce;
+    }
+    
+    .payment-method.active {
+      border-color: #3182ce;
+      background-color: #ebf8ff;
+    }
+    
+    .payment-method-radio {
+      margin-right: 1rem;
+    }
+    
+    .payment-method-icon {
+      margin-right: 1rem;
+      font-size: 1.5rem;
+      width: 30px;
+      text-align: center;
+    }
+    
+    .payment-method-details {
+      flex: 1;
+    }
+    
+    .payment-method-title {
+      font-weight: 500;
+    }
+    
+    .payment-method-description {
+      font-size: 0.9rem;
+      color: #666;
+    }
+    
+    .credit-card-form {
+      margin-top: 1.5rem;
+    }
+    
+    .crypto-payment {
+      margin-top: 1.5rem;
+    }
+    
+    .crypto-address {
+      background-color: #f1f5f9;
+      padding: 1rem;
+      border-radius: 4px;
+      font-family: monospace;
+      margin: 1rem 0;
+      word-break: break-all;
+    }
+    
+    .complete-order-btn {
+      display: block;
+      width: 100%;
+      background-color: #3182ce;
+      color: white;
+      border: none;
+      padding: 0.75rem;
+      border-radius: 4px;
+      font-weight: bold;
+      margin-top: 1.5rem;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+    }
+    
+    .complete-order-btn:hover {
+      background-color: #2b6cb0;
+    }
+    
+    .summary-title {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .order-item {
+      display: flex;
+      margin-bottom: 1rem;
+    }
+    
+    .order-item-image {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-right: 1rem;
+    }
+    
+    .order-item-details {
+      flex: 1;
+    }
+    
+    .order-item-title {
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
+    }
+    
+    .order-item-price {
+      font-size: 0.9rem;
+      color: #3182ce;
+    }
+    
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+    
+    .summary-total {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e2e8f0;
+    }
+    
+    .shipping-info {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #e2e8f0;
+    }
+    
+    .shipping-info-title {
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+    
+    .shipping-address {
+      font-size: 0.9rem;
+      color: #666;
+    }
+    
+    /* Footer */
+    footer {
+      background-color: #2d3748;
+      color: white;
+      padding: 3rem 0;
+      margin-top: 2rem;
+    }
+    
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    
+    .footer-section {
+      flex: 1;
+      min-width: 250px;
+      margin-bottom: 2rem;
+    }
+    
+    .footer-title {
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .footer-links a {
+      color: #cbd5e0;
+      text-decoration: none;
+    }
+    
+    .footer-links a:hover {
+      color: white;
+    }
+    
+    .copyright {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid #4a5568;
+      color: #cbd5e0;
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .payment-container {
+        flex-direction: column;
+      }
+      
+      .form-row {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      
+      .footer-content {
+        flex-direction: column;
+      }
+      
+      .footer-section {
+        margin-bottom: 2rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      nav ul {
+        margin-top: 1rem;
+      }
+      
+      nav ul li {
+        margin: 0 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo"><a href="index.html">Sports Bottles Shop</a></div>
+        <nav>
+          <ul>
+            <li><a href="index.html#products">Products</a></li>
+            <li><a href="index.html#features">Features</a></li>
+            <li><a href="index.html#footer">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <h1 class="page-title">Payment</h1>
+    
+    <section class="payment-section">
+      <div class="payment-container">
+        <div class="payment-form">
+          <div class="form-card">
+            <h3 class="form-title">Payment Method</h3>
+            <div class="payment-methods">
+              <div class="payment-method active">
+                <input type="radio" name="paymentMethod" id="creditCard" class="payment-method-radio" checked>
+                <div class="payment-method-icon">💳</div>
+                <div class="payment-method-details">
+                  <h4 class="payment-method-title">Credit Card</h4>
+                  <p class="payment-method-description">Pay securely with your credit card</p>
+                </div>
+              </div>
+              
+              <div class="payment-method">
+                <input type="radio" name="paymentMethod" id="paypal" class="payment-method-radio">
+                <div class="payment-method-icon">🅿️</div>
+                <div class="payment-method-details">
+                  <h4 class="payment-method-title">PayPal</h4>
+                  <p class="payment-method-description">Pay with your PayPal account</p>
+                </div>
+              </div>
+              
+              <div class="payment-method">
+                <input type="radio" name="paymentMethod" id="crypto" class="payment-method-radio">
+                <div class="payment-method-icon">₿</div>
+                <div class="payment-method-details">
+                  <h4 class="payment-method-title">USDT (BNB Smart Chain)</h4>
+                  <p class="payment-method-description">Pay with cryptocurrency</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="credit-card-form">
+              <div class="form-group">
+                <label for="cardNumber" class="form-label">Card Number</label>
+                <input type="text" id="cardNumber" class="form-input" placeholder="1234 5678 9012 3456" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="cardName" class="form-label">Name on Card</label>
+                <input type="text" id="cardName" class="form-input" placeholder="John Doe" required>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-col">
+                  <div class="form-group">
+                    <label for="expiryDate" class="form-label">Expiry Date</label>
+                    <input type="text" id="expiryDate" class="form-input" placeholder="MM/YY" required>
+                  </div>
+                </div>
+                <div class="form-col">
+                  <div class="form-group">
+                    <label for="cvv" class="form-label">CVV</label>
+                    <input type="password" id="cvv" class="form-input" placeholder="123" required>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="crypto-payment" style="display: none;">
+              <p>Send USDT to the following BNB Smart Chain (BEP-20) address:</p>
+              <div class="crypto-address">0x1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t</div>
+              <div class="form-group">
+                <label for="walletAddress" class="form-label">Your Wallet Address (for refunds if needed)</label>
+                <input type="text" id="walletAddress" class="form-input" placeholder="0x...">
+              </div>
+            </div>
+          </div>
+          
+          <a href="success.html" class="complete-order-btn">Complete Order</a>
+        </div>
+        
+        <div class="order-summary">
+          <h3 class="summary-title">Order Summary</h3>
+          <div class="order-item">
+            <img src="https://via.placeholder.com/60x60?text=Premium" alt="Premium Sports Bottle" class="order-item-image">
+            <div class="order-item-details">
+              <h4 class="order-item-title">Premium Sports Bottle - 500ml</h4>
+              <p class="order-item-price">$19.99 x 1</p>
+            </div>
+          </div>
+          <div class="order-item">
+            <img src="https://via.placeholder.com/60x60?text=Insulated" alt="Insulated Stainless Steel Bottle" class="order-item-image">
+            <div class="order-item-details">
+              <h4 class="order-item-title">Insulated Stainless Steel Bottle - 750ml</h4>
+              <p class="order-item-price">$29.99 x 2</p>
+            </div>
+          </div>
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span>$79.97</span>
+          </div>
+          <div class="summary-row">
+            <span>Tax (10%)</span>
+            <span>$8.00</span>
+          </div>
+          <div class="summary-row">
+            <span>Shipping</span>
+            <span>$5.99</span>
+          </div>
+          <div class="summary-row summary-total">
+            <span>Total</span>
+            <span>$93.96</span>
+          </div>
+          
+          <div class="shipping-info">
+            <h4 class="shipping-info-title">Shipping To:</h4>
+            <div class="shipping-address">
+              <p>John Doe</p>
+              <p>123 Main St, Apt 4B</p>
+              <p>New York, 10001</p>
+              <p>United States</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3 class="footer-title">Sports Bottles Shop</h3>
+          <p>Premium quality bottles for your active lifestyle.</p>
+        </div>
+        
+        <div class="footer-section">
+          <h3 class="footer-title">Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html#products">Products</a></li>
+            <li><a href="index.html#features">Features</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3 class="footer-title">Payment Methods</h3>
+          <ul class="footer-links">
+            <li><a href="#">Credit Card</a></li>
+            <li><a href="#">PayPal</a></li>
+            <li><a href="#">Cryptocurrency</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3 class="footer-title">Contact Us</h3>
+          <ul class="footer-links">
+            <li>Email: info@sportsbottles.com</li>
+            <li>Phone: +1 (123) 456-7890</li>
+            <li>Address: 123 Bottle St, Hydration City</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        &copy; 2025 Sports Bottles Shop. All rights reserved.
+      </div>
+    </div>
+  </footer>
+  
+  <script>
+    // Simple script to toggle payment methods
+    document.addEventListener('DOMContentLoaded', function() {
+      const creditCardRadio = document.getElementById('creditCard');
+      const paypalRadio = document.getElementById('paypal');
+      const cryptoRadio = document.getElementById('crypto');
+      
+      const creditCardForm = document.querySelector('.credit-card-form');
+      const cryptoPayment = document.querySelector('.crypto-payment');
+      
+      const paymentMethods = document.querySelectorAll('.payment-method');
+      
+      // Add click event to payment method containers
+      paymentMethods.forEach(method => {
+        method.addEventListener('click', function() {
+          // Find the radio input inside this container and check it
+          const radio = this.querySelector('input[type="radio"]');
+          radio.checked = true;
+          
+          // Remove active class from all methods
+          paymentMethods.forEach(m => m.classList.remove('active'));
+          
+          // Add active class to clicked method
+          this.classList.add('active');
+          
+          // Show/hide appropriate payment forms
+          if (radio.id === 'creditCard') {
+            creditCardForm.style.display = 'block';
+            cryptoPayment.style.display = 'none';
+          } else if (radio.id === 'crypto') {
+            creditCardForm.style.display = 'none';
+            cryptoPayment.style.display = 'block';
+          } else {
+            creditCardForm.style.display = 'none';
+            cryptoPayment.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

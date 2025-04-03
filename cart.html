@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart - Sports Bottles Shop</title>
+  <style>
+    /* Base styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f8f9fa;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Header */
+    header {
+      background-color: #3182ce;
+      color: white;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    
+    .logo a {
+      color: white;
+      text-decoration: none;
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+    
+    nav ul li {
+      margin-left: 1.5rem;
+    }
+    
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+    }
+    
+    /* Page title */
+    .page-title {
+      margin: 2rem 0;
+      font-size: 2rem;
+      text-align: center;
+    }
+    
+    /* Cart section */
+    .cart-section {
+      padding: 2rem 0 4rem;
+    }
+    
+    .cart-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    
+    .cart-items {
+      flex: 3;
+      min-width: 300px;
+    }
+    
+    .cart-summary {
+      flex: 1;
+      min-width: 250px;
+      background-color: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      align-self: flex-start;
+    }
+    
+    .cart-item {
+      display: flex;
+      margin-bottom: 1.5rem;
+      background-color: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .cart-item-image {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-right: 1.5rem;
+    }
+    
+    .cart-item-details {
+      flex: 1;
+    }
+    
+    .cart-item-title {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .cart-item-price {
+      color: #3182ce;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+    
+    .cart-item-actions {
+      display: flex;
+      align-items: center;
+    }
+    
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      margin-right: 1.5rem;
+    }
+    
+    .quantity-btn {
+      background-color: #e2e8f0;
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    
+    .quantity-input {
+      width: 40px;
+      height: 30px;
+      text-align: center;
+      margin: 0 0.5rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+    }
+    
+    .remove-btn {
+      background-color: #f56565;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    .cart-summary-title {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+    
+    .summary-total {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e2e8f0;
+    }
+    
+    .checkout-btn {
+      display: block;
+      width: 100%;
+      background-color: #3182ce;
+      color: white;
+      border: none;
+      padding: 0.75rem;
+      border-radius: 4px;
+      font-weight: bold;
+      margin-top: 1.5rem;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+    }
+    
+    .checkout-btn:hover {
+      background-color: #2b6cb0;
+    }
+    
+    .empty-cart {
+      text-align: center;
+      padding: 3rem;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .empty-cart h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .empty-cart p {
+      margin-bottom: 2rem;
+      color: #666;
+    }
+    
+    .continue-shopping-btn {
+      display: inline-block;
+      background-color: #3182ce;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    
+    /* Footer */
+    footer {
+      background-color: #2d3748;
+      color: white;
+      padding: 3rem 0;
+      margin-top: 2rem;
+    }
+    
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    
+    .footer-section {
+      flex: 1;
+      min-width: 250px;
+      margin-bottom: 2rem;
+    }
+    
+    .footer-title {
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .footer-links a {
+      color: #cbd5e0;
+      text-decoration: none;
+    }
+    
+    .footer-links a:hover {
+      color: white;
+    }
+    
+    .copyright {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid #4a5568;
+      color: #cbd5e0;
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .cart-container {
+        flex-direction: column;
+      }
+      
+      .cart-item {
+        flex-direction: column;
+      }
+      
+      .cart-item-image {
+        width: 100%;
+        height: 200px;
+        margin-right: 0;
+        margin-bottom: 1rem;
+      }
+      
+      .footer-content {
+        flex-direction: column;
+      }
+      
+      .footer-section {
+        margin-bottom: 2rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      nav ul {
+        margin-top: 1rem;
+      }
+      
+      nav ul li {
+        margin: 0 0.5rem;
+      }
+      
+      .cart-item-actions {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .quantity-control {
+        margin-bottom: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo"><a href="index.html">Sports Bottles Shop</a></div>
+        <nav>
+          <ul>
+            <li><a href="index.html#products">Products</a></li>
+            <li><a href="index.html#features">Features</a></li>
+            <li><a href="index.html#footer">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <h1 class="page-title">Your Cart</h1>
+    
+    <section class="cart-section">
+      <div class="cart-container">
+        <div class="cart-items">
+          <div class="cart-item">
+            <img src="https://via.placeholder.com/100x100?text=Premium+Bottle" alt="Premium Sports Bottle" class="cart-item-image">
+            <div class="cart-item-details">
+              <h3 class="cart-item-title">Premium Sports Bottle - 500ml</h3>
+              <p class="cart-item-price">$19.99</p>
+              <div class="cart-item-actions">
+                <div class="quantity-control">
+                  <button class="quantity-btn">-</button>
+                  <input type="text" value="1" class="quantity-input">
+                  <button class="quantity-btn">+</button>
+                </div>
+                <button class="remove-btn">Remove</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="cart-item">
+            <img src="https://via.placeholder.com/100x100?text=Insulated+Bottle" alt="Insulated Stainless Steel Bottle" class="cart-item-image">
+            <div class="cart-item-details">
+              <h3 class="cart-item-title">Insulated Stainless Steel Bottle - 750ml</h3>
+              <p class="cart-item-price">$29.99</p>
+              <div class="cart-item-actions">
+                <div class="quantity-control">
+                  <button class="quantity-btn">-</button>
+                  <input type="text" value="2" class="quantity-input">
+                  <button class="quantity-btn">+</button>
+                </div>
+                <button class="remove-btn">Remove</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="cart-summary">
+          <h3 class="cart-summary-title">Order Summary</h3>
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span>$79.97</span>
+          </div>
+          <div class="summary-row">
+            <span>Tax (10%)</span>
+            <span>$8.00</span>
+          </div>
+          <div class="summary-row">
+            <span>Shipping</span>
+            <span>$5.99</span>
+          </div>
+          <div class="summary-row summary-total">
+            <span>Total</span>
+            <span>$93.96</span>
+          </div>
+          <a href="checkout.html" class="checkout-btn">Proceed to Checkout</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3 class="footer-title">Sports Bottles Shop</h3>
+          <p>Premium quality bottles for your active lifestyle.</p>
+        </div>
+        
+        <div class="footer-section">
+          <h3 class="footer-title">Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html#products">Products</a></li>
+            <li><a href="index.html#features">Features</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3 class="footer-title">Payment Methods</h3>
+          <ul class="footer-links">
+            <li><a href="#">Credit Card</a></li>
+            <li><a href="#">PayPal</a></li>
+            <li><a href="#">Cryptocurrency</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3 class="footer-title">Contact Us</h3>
+          <ul class="footer-links">
+            <li>Email: info@sportsbottles.com</li>
+            <li>Phone: +1 (123) 456-7890</li>
+            <li>Address: 123 Bottle St, Hydration City</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        &copy; 2025 Sports Bottles Shop. All rights reserved.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

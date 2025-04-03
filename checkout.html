@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - Sports Bottles Shop</title>
+  <style>
+    /* Base styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f8f9fa;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Header */
+    header {
+      background-color: #3182ce;
+      color: white;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    
+    .logo a {
+      color: white;
+      text-decoration: none;
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+    
+    nav ul li {
+      margin-left: 1.5rem;
+    }
+    
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+    }
+    
+    /* Page title */
+    .page-title {
+      margin: 2rem 0;
+      font-size: 2rem;
+      text-align: center;
+    }
+    
+    /* Checkout section */
+    .checkout-section {
+      padding: 2rem 0 4rem;
+    }
+    
+    .checkout-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    
+    .checkout-form {
+      flex: 3;
+      min-width: 300px;
+    }
+    
+    .order-summary {
+      flex: 1;
+      min-width: 250px;
+      background-color: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      align-self: flex-start;
+    }
+    
+    .form-card {
+      background-color: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+    }
+    
+    .form-title {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    
+    .form-input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+    
+    .form-row {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .form-col {
+      flex: 1;
+    }
+    
+    .next-btn {
+      display: block;
+      width: 100%;
+      background-color: #3182ce;
+      color: white;
+      border: none;
+      padding: 0.75rem;
+      border-radius: 4px;
+      font-weight: bold;
+      margin-top: 1.5rem;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+    }
+    
+    .next-btn:hover {
+      background-color: #2b6cb0;
+    }
+    
+    .summary-title {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .order-item {
+      display: flex;
+      margin-bottom: 1rem;
+    }
+    
+    .order-item-image {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-right: 1rem;
+    }
+    
+    .order-item-details {
+      flex: 1;
+    }
+    
+    .order-item-title {
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
+    }
+    
+    .order-item-price {
+      font-size: 0.9rem;
+      color: #3182ce;
+    }
+    
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+    
+    .summary-total {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e2e8f0;
+    }
+    
+    /* Footer */
+    footer {
+      background-color: #2d3748;
+      color: white;
+      padding: 3rem 0;
+      margin-top: 2rem;
+    }
+    
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    
+    .footer-section {
+      flex: 1;
+      min-width: 250px;
+      margin-bottom: 2rem;
+    }
+    
+    .footer-title {
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .footer-links a {
+      color: #cbd5e0;
+      text-decoration: none;
+    }
+    
+    .footer-links a:hover {
+      color: white;
+    }
+    
+    .copyright {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid #4a5568;
+      color: #cbd5e0;
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .checkout-container {
+        flex-direction: column;
+      }
+      
+      .form-row {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      
+      .footer-content {
+        flex-direction: column;
+      }
+      
+      .footer-section {
+        margin-bottom: 2rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      nav ul {
+        margin-top: 1rem;
+      }
+      
+      nav ul li {
+        margin: 0 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo"><a href="index.html">Sports Bottles Shop</a></div>
+        <nav>
+          <ul>
+            <li><a href="index.html#products">Products</a></li>
+            <li><a href="index.html#features">Features</a></li>
+            <li><a href="index.html#footer">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <h1 class="page-title">Checkout</h1>
+    
+    <section class="checkout-section">
+      <div class="checkout-container">
+        <div class="checkout-form">
+          <div class="form-card">
+            <h3 class="form-title">Contact Information</h3>
+            <div class="form-group">
+              <label for="email" class="form-label">Email Address</label>
+              <input type="email" id="email" class="form-input" placeholder="your@email.com" required>
+            </div>
+            <div class="form-row">
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="firstName" class="form-label">First Name</label>
+                  <input type="text" id="firstName" class="form-input" placeholder="John" required>
+                </div>
+              </div>
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="lastName" class="form-label">Last Name</label>
+                  <input type="text" id="lastName" class="form-input" placeholder="Doe" required>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="phone" class="form-label">Phone Number</label>
+              <input type="tel" id="phone" class="form-input" placeholder="+1 (123) 456-7890" required>
+            </div>
+          </div>
+          
+          <div class="form-card">
+            <h3 class="form-title">Shipping Address</h3>
+            <div class="form-group">
+              <label for="street" class="form-label">Street</label>
+              <input type="text" id="street" class="form-input" placeholder="123 Main St" required>
+            </div>
+            <div class="form-row">
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="houseNumber" class="form-label">House Number</label>
+                  <input type="text" id="houseNumber" class="form-input" placeholder="Apt 4B" required>
+                </div>
+              </div>
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="apartment" class="form-label">Apartment (optional)</label>
+                  <input type="text" id="apartment" class="form-input" placeholder="Suite 100">
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="city" class="form-label">City</label>
+                  <input type="text" id="city" class="form-input" placeholder="New York" required>
+                </div>
+              </div>
+              <div class="form-col">
+                <div class="form-group">
+                  <label for="postalCode" class="form-label">Postal Code</label>
+                  <input type="text" id="postalCode" class="form-input" placeholder="10001" required>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="country" class="form-label">Country</label>
+              <input type="text" id="country" class="form-input" placeholder="United States" required>
+            </div>
+          </div>
+          
+          <a href="payment.html" class="next-btn">Proceed to Payment</a>
+        </div>
+        
+        <div class="order-summary">
+          <h3 class="summary-title">Order Summary</h3>
+          <div class="order-item">
+            <img src="https://via.placeholder.com/60x60?text=Premium" alt="Premium Sports Bottle" class="order-item-image">
+            <div class="order-item-details">
+              <h4 class="order-item-title">Premium Sports Bottle - 500ml</h4>
+              <p class="order-item-price">$19.99 x 1</p>
+            </div>
+          </div>
+          <div class="order-item">
+            <img src="https://via.placeholder.com/60x60?text=Insulated" alt="Insulated Stainless Steel Bottle" class="order-item-image">
+            <div class="order-item-details">
+              <h4 class="order-item-title">Insulated Stainless Steel Bottle - 750ml</h4>
+              <p class="order-item-price">$29.99 x 2</p>
+            </div>
+          </div>
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span>$79.97</span>
+          </div>
+          <div class="summary-row">
+            <span>Tax (10%)</span>
+            <span>$8.00</span>
+          </div>
+          <div class="summary-row">
+            <span>Shipping</span>
+            <span>$5.99</span>
+          </div>
+          <div class="summary-row summary-total">
+            <span>Total</span>
+            <span>$93.96</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3 class="footer-title">Sports Bottles Shop</h3>
+          <p>Premium quality bottles for your active lifestyle.</p>
+        </div>
+        
+        <div class="footer-section">
+          <h3 class="footer-title">Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html#products">Products</a></li>
+            <li><a href="index.html#features">Features</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3 class="footer-title">Payment Methods</h3>
+          <ul class="footer-links">
+            <li><a href="#">Credit Card</a></li>
+            <li><a href="#">PayPal</a></li>
+            <li><a href="#">Cryptocurrency</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3 class="footer-title">Contact Us</h3>
+          <ul class="footer-links">
+            <li>Email: info@sportsbottles.com</li>
+            <li>Phone: +1 (123) 456-7890</li>
+            <li>Address: 123 Bottle St, Hydration City</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        &copy; 2025 Sports Bottles Shop. All rights reserved.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
